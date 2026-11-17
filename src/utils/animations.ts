@@ -71,38 +71,10 @@ export function setupSpotlight() {
 }
 
 /* ─── Magnetic Button Effect ─────────────────────────────────────── */
+// Magnetic movement removed — buttons no longer follow the cursor.
+// Arrow icon slides right on hover via CSS (.btn:hover .ar) only.
 export function setupMagnetic() {
-  if (typeof window === 'undefined') return () => {}
-  const fine = window.matchMedia('(pointer:fine)').matches
-  if (!fine) return () => {}
-
-  const controllers: AbortController[] = []
-
-  document.querySelectorAll<HTMLElement>('.mag').forEach((btn) => {
-    const controller = new AbortController()
-    controllers.push(controller)
-    const signal = controller.signal
-
-    btn.addEventListener(
-      'pointermove',
-      (e) => {
-        const rect = btn.getBoundingClientRect()
-        const x = (e.clientX - rect.left - rect.width / 2) * 0.3
-        const y = (e.clientY - rect.top - rect.height / 2) * 0.3
-        btn.style.transform = `translate(${x}px, ${y}px)`
-      },
-      { passive: true, signal }
-    )
-    btn.addEventListener(
-      'pointerleave',
-      () => {
-        btn.style.transform = ''
-      },
-      { signal }
-    )
-  })
-
-  return () => controllers.forEach((c) => c.abort())
+  return () => {}
 }
 
 /* ─── 3D Card Tilt ───────────────────────────────────────────────── */
@@ -111,24 +83,118 @@ export function setupCardTilt() {
   const fine = window.matchMedia('(pointer:fine)').matches
   if (!fine) return () => {}
 
-  let currentTilt: HTMLElement | null = null
+  /**
+   * Single shared RAF loop — no per-card RAF conflicts.
+   * Each card keeps its own (curX, curY) current angles and
+   * (tgtX, tgtY) target angles. The loop runs only while any
+   * card is still moving.
+   */
 
-  function handler(e: PointerEvent) {
-    const card = (e.target as HTMLElement)?.closest?.('.sp.card')
-    if (card instanceof HTMLElement) {
-      const rect = card.getBoundingClientRect()
-      const x = (e.clientX - rect.left) / rect.width - 0.5
-      const y = (e.clientY - rect.top) / rect.height - 0.5
-      card.style.transform = `perspective(800px) rotateX(${-y * 7}deg) rotateY(${x * 7}deg)`
-      currentTilt = card
-    } else if (currentTilt) {
-      currentTilt.style.transform = ''
-      currentTilt = null
-    }
+  interface CardState {
+    curX: number  // current rotateX (deg)
+    curY: number  // current rotateY (deg)
+    tgtX: number  // target  rotateX
+    tgtY: number  // target  rotateY
+    active: boolean
   }
 
-  window.addEventListener('pointermove', handler, { passive: true })
-  return () => window.removeEventListener('pointermove', handler)
+  const cards = new Map<HTMLElement, CardState>()
+  let rafId = 0
+
+  function getState(el: HTMLElement): CardState {
+    if (!cards.has(el)) cards.set(el, { curX: 0, curY: 0, tgtX: 0, tgtY: 0, active: false })
+    return cards.get(el)!
+  }
+
+  const LERP = 0.09   // 0.09 = snappy-smooth; lower → more lag
+
+  function loop() {
+    let stillMoving = false
+
+    cards.forEach((s, el) => {
+      s.curX += (s.tgtX - s.curX) * LERP
+      s.curY += (s.tgtY - s.curY) * LERP
+
+      const doneX = Math.abs(s.tgtX - s.curX) < 0.005
+      const doneY = Math.abs(s.tgtY - s.curY) < 0.005
+
+      if (doneX && doneY && !s.active) {
+        // Snap to exactly zero when resting so transform can be cleared
+        s.curX = 0; s.curY = 0
+        el.style.transform = ''
+      } else {
+        el.style.transform = `perspective(900px) rotateX(${s.curX}deg) rotateY(${s.curY}deg)`
+        if (!doneX || !doneY) stillMoving = true
+      }
+    })
+
+    rafId = stillMoving ? requestAnimationFrame(loop) : 0
+  }
+
+  function startLoop() {
+    if (!rafId) rafId = requestAnimationFrame(loop)
+  }
+
+  function onMove(e: PointerEvent) {
+    const card = (e.target as HTMLElement)?.closest?.('.sp.card')
+    if (!(card instanceof HTMLElement)) return
+
+    const s = getState(card)
+    const rect = card.getBoundingClientRect()
+    const x = (e.clientX - rect.left) / rect.width - 0.5   // −0.5 … +0.5
+    const y = (e.clientY - rect.top)  / rect.height - 0.5
+
+    s.tgtX = -y * 10   // rotateX: tilt up/down
+    s.tgtY =  x * 10   // rotateY: tilt left/right
+    s.active = true
+    startLoop()
+  }
+
+  function onLeave(e: PointerEvent) {
+    const card = (e.target as HTMLElement)?.closest?.('.sp.card')
+    if (!(card instanceof HTMLElement)) return
+    // Only reset when the pointer actually exits the card (not a child)
+    if (e.relatedTarget instanceof Node && card.contains(e.relatedTarget)) return
+
+    const s = getState(card)
+    s.tgtX = 0
+    s.tgtY = 0
+    s.active = false
+    startLoop()
+  }
+
+  // Attach per-card listeners so leave is reliable across child elements
+  function attach(card: HTMLElement) {
+    card.addEventListener('pointermove', onMove,  { passive: true })
+    card.addEventListener('pointerleave', onLeave, { passive: true })
+  }
+
+  // Wire up all existing cards
+  document.querySelectorAll<HTMLElement>('.sp.card').forEach(attach)
+
+  // Also wire up cards added after mount
+  const mo = new MutationObserver((records) => {
+    records.forEach((r) =>
+      r.addedNodes.forEach((n) => {
+        if (n instanceof HTMLElement) {
+          if (n.matches('.sp.card')) attach(n)
+          n.querySelectorAll<HTMLElement>('.sp.card').forEach(attach)
+        }
+      })
+    )
+  })
+  mo.observe(document.body, { childList: true, subtree: true })
+
+  return () => {
+    cancelAnimationFrame(rafId)
+    mo.disconnect()
+    cards.forEach((_, el) => {
+      el.removeEventListener('pointermove', onMove)
+      el.removeEventListener('pointerleave', onLeave)
+      el.style.transform = ''
+    })
+    cards.clear()
+  }
 }
 
 /* ─── Reduced Motion Check ───────────────────────────────────────── */

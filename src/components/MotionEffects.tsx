@@ -64,10 +64,10 @@ export default function MotionEffects() {
     const cleanupSpotlight = setupSpotlight()
 
     /* ─── 3. Magnetic Buttons ─────────────────────────────────────── */
-    const cleanupMagnetic = reducedMotion ? () => {} : setupMagnetic()
+    const cleanupMagnetic = reducedMotion ? () => { } : setupMagnetic()
 
     /* ─── 4. 3D Card Tilt ─────────────────────────────────────────── */
-    const cleanupTilt = reducedMotion ? () => {} : setupCardTilt()
+    const cleanupTilt = reducedMotion ? () => { } : setupCardTilt()
 
     return () => {
       observer.disconnect()
