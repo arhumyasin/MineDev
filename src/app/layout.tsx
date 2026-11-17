@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import ChatAssistant from '@/components/ChatAssistant'
 import MotionEffects from '@/components/MotionEffects'
 import BackgroundOrbs from '@/components/BackgroundOrbs'
 import './globals.css'
@@ -21,7 +20,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           {children}
         </div>
         <Footer />
-        <ChatAssistant />
         <MotionEffects />
       </body>
     </html>

@@ -29,15 +29,38 @@ const iconPaths: Record<string, string> = {
   x: 'M6 6l12 12M18 6 6 18',
   up: 'M12 19V5M5 12l7-7 7 7',
   mic: 'M9 2h6v12a3 3 0 0 1-6 0V2ZM5 11a7 7 0 0 0 14 0M12 18v4',
+  fb: 'M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z',
   ln: 'M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4z',
   gh: 'M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-1-2.6c3.3-.4 6.8-1.6 6.8-7.3A5.7 5.7 0 0 0 21.3 4.8 5.3 5.3 0 0 0 21.2 1S20 .6 17 2.6a13.4 13.4 0 0 0-7 0C7 .6 5.8 1 5.8 1a5.3 5.3 0 0 0-.1 3.8A5.7 5.7 0 0 0 4.2 8.8c0 5.7 3.5 6.9 6.8 7.3a3.4 3.4 0 0 0-1 2.6V22',
   ig: 'M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5 4a4 4 0 1 0 8 0 4 4 0 0 0-8 0Zm9.5-5.5h.01',
+  rd: 'M4 14a8 6.5 0 1 0 16 0a8 6.5 0 1 0-16 0M12 7.6 15.8 3.4M15.6 2.6a1 1 0 1 0 2 0a1 1 0 1 0-2 0M8.1 13.5a0.9 0.9 0 1 0 1.8 0a0.9 0.9 0 1 0-1.8 0M14.1 13.5a0.9 0.9 0 1 0 1.8 0a0.9 0.9 0 1 0-1.8 0M9.5 16.8Q12 18.3 14.5 16.8',
   xx: 'M4 4l16 16M20 4 4 20',
+  cash: 'M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6Zm4 6a6 6 0 0 1 12 0 6 6 0 0 1-12 0Zm6-3a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z',
+  agent: 'M10 9h4a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2ZM10.8 12.5h.01M13.2 12.5h.01M12 9V4M12 4h.01M2 13a10 5 0 1 0 20 0 10 5 0 0 0-20 0ZM22 13h.01',
+  workflow: 'M4 6h4v4H4Zm12 0h4v4h-4Zm-6 12h4v4h-4ZM8 8h8m-4 2v8',
+  target: 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm0 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z',
+  monitor: 'M4 3h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm4 18h8m-4-4v4',
+  layers: 'M12 2l10 5-10 5-10-5ZM2 17l10 5 10-5M2 12l10 5 10-5',
+  shield: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z',
+  clock: 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20ZM12 6v6l4 2',
+  whatsapp: 'M12 2a10 10 0 0 0-10 10c0 2.1.7 4 1.8 5.6L2 22l4.6-1.7A10 10 0 1 0 12 2ZM9 7h6v8H9Zm2 6h2',
+  mobileapp: 'M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2ZM8 6h3v3H8zM13 6h3v3h-3zM8 11h3v3H8zM13 11h3v3h-3zM10 18.5h4',
+
 }
 
-export function Icon({ name, className = 'i' }: { name: string; className?: string }) {
+export function Icon({ name, className = 'i', color }: { name: string; className?: string; color?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color ?? "currentColor"}
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      style={color ? { color } : undefined}
+    >
       <path d={iconPaths[name] ?? iconPaths.sparkles} />
     </svg>
   )
@@ -62,25 +85,207 @@ export function PageFrame({ children }: { children: ReactNode }) {
 }
 
 export const serviceItems = [
-  { icon: 'globe', title: 'Custom Web Applications', description: 'Dashboards, portals, SaaS and internal tools built end to end.', status: 'Now' },
-  { icon: 'palette', title: 'UI/UX Design', description: 'Research, wireframes and polished interfaces that convert.', status: 'Now' },
-  { icon: 'cart', title: 'E-commerce', description: 'Stores, payments and inventory, built for speed.', status: 'Now' },
-  { icon: 'bot', title: 'AI Automation', description: 'Workflows that handle leads, emails, reports and data entry.', status: 'Now' },
-  { icon: 'chat', title: 'AI Chatbots & Agents', description: 'Assistants trained on your content, live on web and WhatsApp.', status: 'Now' },
-  { icon: 'plug', title: 'APIs & Integrations', description: 'Connect CRMs, payment gateways and third-party tools.', status: 'Now' },
-  { icon: 'globe', title: 'Mobile & PWA', description: 'Installable apps that feel native on any phone.', status: 'Now' },
-  { icon: 'rocket', title: 'SEO & Performance', description: 'Core Web Vitals, hosting, security and maintenance.', status: 'Now' },
-  { icon: 'zap', title: 'Autonomous AI Agents', description: 'Agents that plan and complete multi-step business tasks.', status: 'Next' },
-  { icon: 'chat', title: 'Voice AI', description: 'Call and voice assistants for support and sales.', status: 'Next' },
-  { icon: 'sparkles', title: 'Personalised Websites', description: 'Pages that adapt content to each visitor in real time.', status: 'Next' },
-  { icon: 'box', title: '3D & Immersive Web', description: 'Interactive 3D product views and WebXR experiences.', status: 'Next' },
+  { icon: 'cpu', title: 'High-Performance Web Apps', description: 'Powerful custom apps and portals built to handle your business smoothly, scale without crashing, and keep your revenue flowing.', status: 'Now' },
+  { icon: 'palette', title: 'High-Converting Design', description: 'Stunning, user-friendly designs crafted specifically to turn casual website visitors into paying buyers.', status: 'Now' },
+  { icon: 'cart', title: 'Online Stores That Sell', description: 'Lightning-fast online stores with a seamless checkout process designed to double your daily online sales', status: 'Now' },
+  { icon: 'bot', title: 'Automated Workflows', description: 'Smart systems that handle customer emails, leads, and tasks automatically—saving your team hours and cutting overhead costs.', status: 'Now' },
+  { icon: 'chat', title: '24/7 Sales Assistant', description: 'An intelligent digital salesperson active on your website and WhatsApp round-the-clock, qualifying leads and closing deals while you sleep.', status: 'Now' },
+  { icon: 'plug', title: 'Seamless Connections', description: 'Connecting all your software, payment gateways, and tools into one smooth system so nothing ever slips through the cracks.', status: 'Now' },
+  { icon: 'mobileapp', title: 'Mobile & PWA', description: 'Installable apps that feel native on any phone, load instantly, keep working on weak internet, and bring customers back with a home-screen icon and timely reminders.', status: 'Now' },
+  { icon: 'rocket', title: 'SEO & Performance', description: 'Lightning-fast websites tuned for Core Web Vitals, with secure hosting and ongoing maintenance, so Google ranks you higher, visitors stay longer, and nothing breaks while you focus on your business.', status: 'Now' },
+  { icon: 'agent', title: 'Autonomous AI Agents', description: 'AI agents that plan and complete multi-step tasks on their own, from researching leads to sending follow-ups, saving your team hours every day.', status: 'Now' },
+  { icon: 'mic', title: 'Voice AI', description: 'Voice assistants that answer calls, handle support and book appointments around the clock, so no customer is ever left waiting.', status: 'Now' },
+  { icon: 'globe', title: 'Personalised Websites', description: 'Pages that adapt content to each visitor in real time.', status: 'Now' },
+  { icon: 'box', title: '3D & Immersive Web', description: 'Interactive 3D product views and WebXR experiences.', status: 'Now' },
+  { icon: 'cart', title: 'Agentic Commerce Stores', description: 'Online stores built so AI shopping assistants can find your products, compare them and place orders, bringing you buyers who never open a browser.', status: 'Now' },
+  { icon: 'plug', title: 'MCP & AI Integrations', description: 'Connect your CRM, inventory and payments through MCP so any AI assistant can safely use your business tools and data.', status: 'Now' },
+  { icon: 'shield', title: 'AI Guardrails & Governance', description: 'Spending limits, approval steps and audit logs that keep every AI agent safe, in control and accountable.', status: 'Next' },
+  { icon: 'search', title: 'AI Search Visibility', description: 'Get your business recommended by ChatGPT, Claude and Gemini, not just ranked on Google.', status: 'Next' },
+  { icon: 'workflow', title: 'Multi-Agent Workflows', description: 'Teams of AI agents that work together, one finds leads, one follows up, one reports, so your operations run themselves.', status: 'Next' },
 ] as const
 
+
+
+
 export const projects = [
-  { id: 'saas', title: 'SaaS Analytics Dashboard', shortTitle: 'SaaS analytics dashboard', tag: 'Web app · Analytics', type: 'Web app', category: 'Dashboard', description: 'Role-based access, live charts and exports.', subtitle: 'One dashboard, many roles, and every number had to be trustworthy and live.', sector: 'SaaS', engagement: 'Web app build', status: 'Live', theme: '', challenge: 'The client’s team tracked sales and usage across spreadsheets and three separate tools. Managers needed one view, finance needed exports, and support staff needed to see only their own accounts. A generic admin template would have been slow with live data and impossible to lock down by role.', technologies: ['Next.js', 'React', 'Node.js', 'PostgreSQL', 'Chart.js', 'Vercel'], built: [['Role-based access', 'Admins, managers and agents each see only what they need, enforced on the server.'], ['Live charts', 'Data refreshes in the background so numbers are current without reloading the page.'], ['One-click exports', 'Reports download as CSV or PDF with the filters already applied.'], ['Built to scale', 'Paginated queries and caching keep the dashboard fast as the data grows.']] },
-  { id: 'ai', title: 'AI Support Agent', shortTitle: 'AI support agent', tag: 'AI · Chatbot', type: 'AI', category: 'Chatbot', description: 'Answers customer questions from the client’s own documents.', subtitle: 'An assistant that answers from the client’s own documents, in the customer’s language.', sector: 'Customer support', engagement: 'AI agent build', status: 'Live', theme: 'b', challenge: 'Support staff were answering the same questions all day, and a basic FAQ bot kept giving wrong or invented answers. The assistant had to stick to the company’s own content, admit when it didn’t know, and hand over to a human without losing the conversation.', technologies: ['OpenAI', 'Python', 'LangChain', 'Pinecone', 'WhatsApp API', 'React'], built: [['Answers from your content', 'Documents are indexed so replies come from the client’s own material, not guesses.'], ['Human handover', 'When confidence is low, the chat passes to a team member with the full history.'], ['Web and WhatsApp', 'The same assistant runs on the website and on WhatsApp.'], ['Lead capture', 'Name, email and need are collected and sent straight to the CRM.']] },
-  { id: 'store', title: 'Online Store', shortTitle: 'Online store', tag: 'E-commerce · Automation', type: 'E-commerce', category: 'Automation', description: 'Fast storefront with automated order flows.', subtitle: 'A fast storefront where every order moves on its own.', sector: 'Retail', engagement: 'Store build', status: 'Live', theme: 'c', challenge: 'The shop had products on social media but no way to take payments or track stock, so orders arrived by message and were copied by hand. The store had to load quickly on mobile, accept local and card payments, and stop overselling items.', technologies: ['Shopify', 'Liquid', 'Stripe', 'Zapier', 'Google Analytics'], built: [['Mobile-first storefront', 'Lightweight pages and clear product filters that work well on a phone.'], ['Payments wired in', 'Card and local payment options, with confirmation emails sent automatically.'], ['Live inventory', 'Stock updates after every sale so sold-out items can’t be ordered.'], ['Automated order flow', 'New orders trigger invoices, courier details and customer updates without manual work.']] },
+  {
+    id: 'saas',
+    title: 'Azzivone',
+    shortTitle: <>E-commerce | <span style={{ color: 'var(--li)' }}>Luxury Brand</span></>,
+    tag: 'Pakistan’s Premier Luxury Store',
+    type: 'Luxury E-commerce',
+    category: 'E-commerce',
+    description: 'A high-end, lightning-fast digital storefront built to deliver an exclusive shopping experience and drive premium sales.',
+    subtitle: 'A premium D2C shopping experience designed for high conversions and speed.',
+    sector: 'Fashion & Luxury',
+    engagement: 'Store & Brand Build',
+    status: 'Live',
+    theme: '',
+    challenge: 'The client needed a luxurious online presence that reflected their high-end brand identity while offering ultra-fast page load speeds, seamless payment integrations, and zero inventory friction during high-traffic sales.',
+    technologies: ['Next.js', 'React', 'Shopify Plus', 'Stripe', 'Tailwind CSS', 'Vercel'],
+    built: [
+      ['Luxury UI/UX', 'Custom high-end interface tailored to convey brand exclusivity.'],
+      ['Lightning-Fast Checkout', 'Optimized checkout flow reducing cart abandonment rates.'],
+      ['Automated Inventory', 'Real-time stock synchronization across warehouse and storefront.'],
+      ['Mobile Optimization', 'Fluid mobile navigation delivering an app-like shopping experience.']
+    ]
+  },
+  {
+    id: 'ai',
+    title: 'DocNode',
+    shortTitle: <><span style={{ color: 'var(--li)' }}>AI Healthcare</span> Platform</>,
+    tag: 'Web App · AI Systems',
+    type: 'Healthcare Technology',
+    category: 'AI Automation',
+    description: 'AI-Powered Hospital Management System that automates patient records, scheduling, and hospital workflows seamlessly.',
+    subtitle: 'Streamlining hospital management and patient records with intelligent automation.',
+    sector: 'Healthcare',
+    engagement: 'Full-Stack & AI Build',
+    status: 'Live',
+    theme: 'b',
+    challenge: 'Hospitals faced immense delays due to manual patient onboarding, scattered medical records, and inefficient appointment scheduling, which increased administrative costs and reduced patient satisfaction.',
+    technologies: ['React', 'Python', 'FastAPI', 'PostgreSQL', 'OpenAI API', 'Docker'],
+    built: [
+      ['Smart Patient Triage', 'AI agent categorizes patient inquiries and schedules urgent care appointments.'],
+      ['Automated EMR Management', 'Instant record updates and summaries generated from patient interactions.'],
+      ['Staff Allocation Dashboard', 'Real-time tracking of doctor availability and ward capacities.'],
+      ['Secure Data Compliance', 'Role-based encryption ensuring patient health records remain confidential.']
+    ]
+  },
+  {
+    id: 'store',
+    title: 'LeadBot',
+    shortTitle: <><span style={{ color: 'var(--li)' }}>AI CRM</span> & Assistant</>,
+    tag: 'AI Agent · Messaging CRM',
+    type: 'AI System',
+    category: 'Sales Automation',
+    description: 'AI-powered CRM and phone messaging assistant that handles incoming leads, calls, and customer chats 24/7.',
+    subtitle: 'An intelligent digital assistant that qualifies leads and closes sales on autopilot.',
+    sector: 'Sales & Customer Engagement',
+    engagement: 'AI Agent & CRM Build',
+    status: 'Live',
+    theme: 'c',
+    challenge: 'Businesses were losing potential clients outside of operating hours because human agents could not respond instantly to phone calls, WhatsApp messages, and website leads.',
+    technologies: ['OpenAI', 'Python', 'WhatsApp Business API', 'Twilio', 'Node.js', 'MongoDB'],
+    built: [
+      ['24/7 Phone & Chat Agent', 'Responds to inquiries across WhatsApp, SMS, and web instantly.'],
+      ['Automated Lead Qualification', 'Asks custom qualifying questions and tags high-value prospects.'],
+      ['CRM Auto-Sync', 'Directly creates and updates deals in the client’s existing sales pipeline.'],
+      ['Smart Human Handover', 'Seamlessly routes hot leads to sales reps with full chat history.']
+    ]
+  },
+  {
+    id: 'voice-receptionist',
+    title: 'AI Voice Receptionist',
+    shortTitle: <><span style={{ color: 'var(--li)' }}>AI Voice</span> Receptionist</>,
+    tag: 'Voice AI · Phone Reception',
+    type: 'Voice AI',
+    category: 'Voice Assistant',
+    description: 'A natural-sounding AI receptionist that answers every call, books appointments and routes urgent requests to your team, day and night.',
+    subtitle: 'Every call answered, every appointment booked — even after hours.',
+    sector: 'Customer Support & Services',
+    engagement: 'Voice AI Build',
+    status: 'Live',
+    theme: '',
+    challenge: 'Businesses were missing calls outside office hours and losing customers to faster competitors, while reception staff spent their whole day on repetitive phone screening instead of helping the people in front of them.',
+    technologies: ['OpenAI', 'ElevenLabs', 'Twilio', 'Node.js', 'Next.js', 'PostgreSQL'],
+    built: [
+      ['Natural Voice Reception', 'A human-like voice agent that greets callers, answers questions and takes messages.'],
+      ['Appointment Booking', 'Books, reschedules and confirms appointments straight into the team calendar.'],
+      ['Smart Call Routing', 'Urgent requests are transferred to a team member instantly, with full context.'],
+      ['After-Hours Coverage', 'The receptionist works nights and weekends, so no call is ever missed.']
+    ]
+  },
+  {
+    id: 'agentic-commerce',
+    title: 'Agentic Commerce Store',
+    shortTitle: <><span style={{ color: 'var(--li)' }}>Agentic Commerce</span> Store</>,
+    tag: 'Agentic Commerce · E-commerce',
+    type: 'Agentic Commerce',
+    category: 'E-commerce',
+    description: 'An online store built so AI shopping assistants can discover products, compare options and place orders, alongside a fast storefront for human shoppers.',
+    subtitle: 'A store AI assistants can shop — and humans love to browse.',
+    sector: 'E-commerce & Retail',
+    engagement: 'Store & AI Build',
+    status: 'Live',
+    theme: 'b',
+    challenge: 'Shopping assistants are starting to buy on behalf of customers, but most stores are built only for humans — their product data is hidden in pages AI agents cannot read, so those sales go to competitors who are ready.',
+    technologies: ['Next.js', 'React', 'Shopify', 'OpenAI API', 'Stripe', 'Vercel'],
+    built: [
+      ['AI-Readable Catalogue', 'Structured product data AI shopping assistants can discover and compare.'],
+      ['Agentic Checkout', 'AI assistants can place orders securely, with clear limits set by the store.'],
+      ['Fast Human Storefront', 'A lightning-fast storefront for human shoppers, with the same live stock.'],
+      ['Live Inventory Sync', 'Stock, prices and orders stay in sync across AI and human checkouts.']
+    ]
+  },
+  {
+    id: 'mcp-hub',
+    title: 'MCP Integration Hub',
+    shortTitle: <><span style={{ color: 'var(--li)' }}>MCP</span> Integration Hub</>,
+    tag: 'AI Integration · MCP',
+    type: 'AI Integration',
+    category: 'AI Integrations',
+    description: 'A secure hub that connects your CRM, inventory and payments to AI assistants through MCP, so teams can work with their own data in plain language.',
+    subtitle: 'Your business data, connected to AI assistants — securely, in plain language.',
+    sector: 'Business Operations',
+    engagement: 'Integration Build',
+    status: 'Live',
+    theme: 'c',
+    challenge: 'Teams wanted to ask AI assistants questions about their own business — sales, stock, payments — but their data lived in separate tools with no safe way to connect it, so answers were guesses instead of facts.',
+    technologies: ['Model Context Protocol', 'Node.js', 'TypeScript', 'PostgreSQL', 'OpenAI API', 'Docker'],
+    built: [
+      ['Secure MCP Connectors', 'CRM, inventory and payments connected through MCP with scoped access.'],
+      ['Plain-Language Questions', 'Ask in normal words and get answers from your own live data.'],
+      ['Permission Controls', 'Every assistant sees only the data its role is allowed to see.'],
+      ['Live Data Sync', 'Answers always come from current data, never from an old export.']
+    ]
+  },
+  {
+    id: 'multi-agent-ops',
+    title: 'Multi-Agent Operations',
+    shortTitle: <><span style={{ color: 'var(--li)' }}>Multi-Agent</span> Operations</>,
+    tag: 'AI Agents · Operations',
+    type: 'AI Agents',
+    category: 'Multi-Agent Workflows',
+    description: 'A team of specialised AI agents that research leads, write outreach, follow up and report, working together so routine operations run on their own.',
+    subtitle: 'A team of AI agents that runs routine operations while your team focuses on growth.',
+    sector: 'Sales & Operations',
+    engagement: 'Multi-Agent Build',
+    status: 'Live',
+    theme: '',
+    challenge: 'The sales team spent most of its week on routine work — researching leads, writing outreach, chasing replies and compiling reports — leaving almost no time for real conversations and closing deals.',
+    technologies: ['OpenAI', 'LangChain', 'Python', 'PostgreSQL', 'Slack API', 'Next.js'],
+    built: [
+      ['Lead Research Agent', 'Researches every new lead and builds a short brief before outreach.'],
+      ['Outreach Writer', 'Writes personalised outreach in the team’s voice, ready to send.'],
+      ['Follow-Up Agent', 'Chases replies politely and hands warm leads to a human at the right moment.'],
+      ['Reporting Dashboard', 'Daily summary of what each agent did, what worked and what needs attention.']
+    ]
+  },
+  {
+    id: 'saas-analytics-platform',
+    title: 'SaaS Analytics Platform',
+    shortTitle: <><span style={{ color: 'var(--li)' }}>SaaS Analytics</span> Platform</>,
+    tag: 'SaaS · Analytics Dashboard',
+    type: 'SaaS Platform',
+    category: 'Web Apps',
+    description: 'A subscription analytics platform that turns revenue, churn and usage data into clear dashboards and AI-written insights founders can act on.',
+    subtitle: 'Revenue, churn and usage — turned into decisions, not just charts.',
+    sector: 'SaaS & Startups',
+    engagement: 'SaaS Product Build',
+    status: 'Live',
+    theme: 'b',
+    challenge: 'Founders were checking five different tools to understand their subscription business, spotting churn and falling revenue only after the money was already gone.',
+    technologies: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Stripe', 'Vercel'],
+    built: [
+      ['Real-Time Dashboards', 'Revenue, churn and usage update live from every billing and product source.'],
+      ['AI-Written Insights', 'Plain-language insights explain what changed and what to do about it.'],
+      ['Churn Alerts', 'Automatic alerts when a valuable customer is at risk of leaving.'],
+      ['One-Click Reports', 'Weekly performance reports generated and shared automatically.']
+    ]
+  },
 ] as const
+
 
 export function ProjectCard({ project }: { project: (typeof projects)[number] }) {
   return (

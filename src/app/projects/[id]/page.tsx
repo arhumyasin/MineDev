@@ -14,7 +14,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ id: 
   return (
     <PageFrame>
       <article>
-        <div className="rv"><span className="ctag">{project.tag}</span><h1 className="cs-h">{project.title}</h1><div className="crumb"><Link href="/">Home</Link> › <Link href="/projects">Projects</Link> › {project.title}</div><p className="csub">{project.subtitle}</p></div>
+        <div className="rv"><div style={{ marginBottom: 18 }}><Link className="btn" href="/projects" style={{ padding: '8px 24px 8px 8px' }}><i className="ar" style={{ transform: 'rotate(180deg)' }}><Icon name="arrow" /></i>Back</Link></div><span className="ctag">{project.tag}</span><h1 className="cs-h">{project.title}</h1><p className="csub">{project.subtitle}</p></div>
         <div className="meta rv"><div><small>Sector</small><b>{project.sector}</b></div><div><small>Engagement</small><b>{project.engagement}</b></div><div><small>Status</small><b>{project.status}</b></div></div>
         <div className={`th cimg rv${project.theme ? ` ${project.theme}` : ''}`} aria-label={`${project.title} preview`} />
         <div className="cgrid"><div className="rv"><h2 className="sec">The challenge</h2><p>{project.challenge}</p></div><aside>

@@ -65,6 +65,17 @@ export default function ThreeScene() {
     let resizeObserver: ResizeObserver | undefined
     let pointerX = 0
     let pointerY = 0
+    let lastTime = 0
+    // Cursor poori window me kahin bhi ho — shape us taraf move kare.
+    // Canvas ke bahar ki position ko -0.5…0.5 par clamp kar do.
+    const onPointerMove = (event: PointerEvent) => {
+      const bounds = canvas.getBoundingClientRect()
+      const nx = (event.clientX - bounds.left) / bounds.width - 0.5
+      const ny = (event.clientY - bounds.top) / bounds.height - 0.5
+      pointerX = Math.max(-0.5, Math.min(0.5, nx))
+      pointerY = Math.max(-0.5, Math.min(0.5, ny))
+    }
+    const onPointerLeaveWindow = () => { pointerX = 0; pointerY = 0 }
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     loadThree().then((T) => {
@@ -80,19 +91,19 @@ export default function ThreeScene() {
 
         const knot = new T.Mesh(
           new T.TorusKnotGeometry(1, 0.32, 160, 20),
-          new T.MeshStandardMaterial({ color: 0x9eeb20, metalness: 0.5, roughness: 0.28 }),
+          new T.MeshStandardMaterial({ color: 0x8efb03, metalness: 0.5, roughness: 0.28 }),
         )
         group.add(knot)
 
-        const particles = new Float32Array(260 * 3)
-        for (let i = 0; i < particles.length; i += 1) particles[i] = (Math.random() - 0.5) * 10
+        const particles = new Float32Array(900 * 3)
+        for (let i = 0; i < particles.length; i += 1) particles[i] = (Math.random() - 0.5) * 14
         const particleGeometry = new T.BufferGeometry()
         particleGeometry.setAttribute('position', new T.BufferAttribute(particles, 3))
-        const points = new T.Points(particleGeometry, new T.PointsMaterial({ color: 0x9eeb20, size: 0.035 }))
+        const points = new T.Points(particleGeometry, new T.PointsMaterial({ color: 0x8efb03, size: 0.035 }))
         scene.add(points, new T.AmbientLight(0xffffff, 0.6))
         const blueLight = new T.PointLight(0x5b57ff, 2.2, 30)
         blueLight.position.set(4, 3, 4)
-        const limeLight = new T.PointLight(0x9eeb20, 1.8, 30)
+        const limeLight = new T.PointLight(0x8efb03, 1.8, 30)
         limeLight.position.set(-4, -2, 3)
         scene.add(blueLight, limeLight)
 
@@ -104,33 +115,43 @@ export default function ThreeScene() {
           camera.aspect = width / height
           camera.updateProjectionMatrix()
         }
-        const render = () => {
+        const render = (time: number) => {
           if (disposed) return
-          const now = performance.now() / 1000
+          const now = time / 1000
+          // Smooth fix: smoothing ab waqt (dt) se hoti hai, frame count se nahi.
+          // Purana code har frame fixed 0.03 use karta tha — frame drop hote hi
+          // speed badal jati thi aur movement atak-atak kar lagti thi (glitch).
+          // Ab 60Hz, 120Hz ya frame drop — har haal me aik jesi smooth feel hai.
+          const dt = lastTime ? Math.min(Math.max((time - lastTime) / 1000, 0), 0.05) : 0
+          lastTime = time
           knot.rotation.x = now * 0.4
           knot.rotation.y = now * 0.55
           points.rotation.y = now * 0.03
-          group.rotation.y += (pointerX * 1.4 - group.rotation.y) * 0.05
-          group.rotation.x += (pointerY * 0.8 - group.rotation.x) * 0.05
+          // 8/s = ~0.125s me target ki taraf 63% — cursor ke saath tight follow.
+          // Aur slow chahiye to 8 ko 5 kar do, aur fast chahiye to 12.
+          const k = 1 - Math.exp(-dt * 8)
+          // Rotation: cursor jis taraf, shape us taraf murr jaye (range bhi zyada)
+          group.rotation.y += (pointerX * 2.0 - group.rotation.y) * k
+          group.rotation.x += (pointerY * 1.2 - group.rotation.x) * k
+          // Position: shape asal me us taraf shift bhi ho (sirf tilt nahi)
+          group.position.x += (pointerX * 1.2 - group.position.x) * k
+          group.position.y += (-pointerY * 0.7 - group.position.y) * k
           renderer?.render(scene, camera)
           if (!reducedMotion) frame = window.requestAnimationFrame(render)
         }
-        const onPointerMove = (event: PointerEvent) => {
-          const bounds = canvas.getBoundingClientRect()
-          pointerX = (event.clientX - bounds.left) / bounds.width - 0.5
-          pointerY = (event.clientY - bounds.top) / bounds.height - 0.5
-        }
-
         resize()
         resizeObserver = new ResizeObserver(resize)
         resizeObserver.observe(canvas)
         observer = new IntersectionObserver(([entry]) => {
           window.cancelAnimationFrame(frame)
-          if (entry.isIntersecting) render()
+          if (entry.isIntersecting) {
+            lastTime = 0
+            render(performance.now())
+          }
         })
         observer.observe(canvas)
-        canvas.addEventListener('pointermove', onPointerMove)
-        canvas.addEventListener('pointerleave', () => { pointerX = 0; pointerY = 0 })
+        window.addEventListener('pointermove', onPointerMove)
+        document.documentElement.addEventListener('mouseleave', onPointerLeaveWindow)
       } catch {
         canvas.setAttribute('aria-label', 'Interactive 3D scene is unavailable in this browser')
       }
@@ -141,6 +162,8 @@ export default function ThreeScene() {
     return () => {
       disposed = true
       window.cancelAnimationFrame(frame)
+      window.removeEventListener('pointermove', onPointerMove)
+      document.documentElement.removeEventListener('mouseleave', onPointerLeaveWindow)
       observer?.disconnect()
       resizeObserver?.disconnect()
       renderer?.dispose()
