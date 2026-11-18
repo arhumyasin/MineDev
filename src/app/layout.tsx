@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import MotionEffects from '@/components/MotionEffects'
@@ -14,6 +15,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" data-theme="dark">
       <body className="overflow-x-hidden min-h-screen flex flex-col items-center">
+        <SpeedInsights />
         <BackgroundOrbs />
         <Header />
         <div className="flex-1 w-full flex flex-col items-center justify-center">
