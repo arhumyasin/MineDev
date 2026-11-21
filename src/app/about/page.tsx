@@ -110,7 +110,7 @@ const css = `
 .tm-founder h4{margin:0;font-size:1.5rem;letter-spacing:-.02em}
 .tm-role{display:block;margin:2px 0 10px;color:var(--li);font-weight:700;font-size:.85rem;letter-spacing:.04em}
 .tm-founder p{margin:0;max-width:60ch;font-size:.95rem;line-height:1.7}
-@media(max-width:560px){.tm-founder{grid-template-columns:1fr}}
+@media(max-width:560px){.tm-founder{grid-template-columns:1fr}.tm-founder .btn{width:100%;justify-content:space-between}}
 .tm-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:14px}
 @media(max-width:620px){.tm-grid{grid-template-columns:1fr}}
 .tm-card{display:flex;align-items:center;gap:20px;padding:24px}
@@ -204,7 +204,7 @@ export default function AboutPage() {
             <span className="tm-role">{founder.role}</span>
             <p>{founder.bio}</p>
           </div>
-          <ActionLink href="mailto:arhumvista@gmail.com">Meet the Founder</ActionLink>
+          <ActionLink href="mailto:Contact@minedev.agency">Meet the Founder</ActionLink>
         </div>
 
         <div className="tm-grid">

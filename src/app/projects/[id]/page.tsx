@@ -11,12 +11,39 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ id: 
   const project = projects.find((item) => item.id === id)
   if (!project) notFound()
 
+  const projectRecord = project as typeof project & { image?: string; detailImage?: string }
+  const projectImg = projectRecord.detailImage || projectRecord.image
+
   return (
     <PageFrame>
       <article>
         <div className="rv"><div style={{ marginBottom: 18 }}><Link className="btn" href="/projects" style={{ padding: '8px 24px 8px 8px' }}><i className="ar" style={{ transform: 'rotate(180deg)' }}><Icon name="arrow" /></i>Back</Link></div><span className="ctag">{project.tag}</span><h1 className="cs-h">{project.title}</h1><p className="csub">{project.subtitle}</p></div>
         <div className="meta rv"><div><small>Sector</small><b>{project.sector}</b></div><div><small>Engagement</small><b>{project.engagement}</b></div><div><small>Status</small><b>{project.status}</b></div></div>
-        <div className={`th cimg rv${project.theme ? ` ${project.theme}` : ''}`} aria-label={`${project.title} preview`} />
+        {projectImg ? (
+          <div
+            className="th cimg has-img rv"
+            style={{
+              height: 'auto',
+              maxHeight: 'none',
+              padding: 0,
+              overflow: 'hidden',
+              borderRadius: 28,
+            }}
+          >
+            <img
+              src={projectImg}
+              alt={project.title}
+              style={{
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+                borderRadius: 28,
+              }}
+            />
+          </div>
+        ) : (
+          <div className={`th cimg rv${project.theme ? ` ${project.theme}` : ''}`} aria-label={`${project.title} preview`} />
+        )}
         <div className="cgrid"><div className="rv"><h2 className="sec">The challenge</h2><p>{project.challenge}</p></div><aside>
           <div className="side rv"><small>Built with</small><div className="row">{project.technologies.map((technology) => <span className="pl" key={technology}>{technology}</span>)}</div></div>
           <div className="side rv"><strong>Something like this?</strong><p>Tell us what you’re building. We’ll reply within one business day.</p><Link className="btn" href="/contact">Start a project<i className="ar"><Icon name="arrow" /></i></Link></div>

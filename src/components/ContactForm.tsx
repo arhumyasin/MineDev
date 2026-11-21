@@ -217,8 +217,8 @@ export default function ContactForm() {
           <p>
             We&apos;ve received your message and will get back to you within 24 hours. You can also
             reach us at{' '}
-            <a href="mailto:minedev544@gmail.com" style={{ color: 'var(--li)' }}>
-              minedev544@gmail.com
+            <a href="mailto:Contact@minedev.agency" style={{ color: 'var(--li)' }}>
+              Contact@minedev.agency
             </a>
           </p>
           <button className="btn lt" onClick={() => { setSent(false); setError('') }}>

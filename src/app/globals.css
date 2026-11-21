@@ -1175,29 +1175,33 @@ main {
   scale: 1.03
 }
 
-.th::after {
-  content: "";
-  position: absolute;
-  left: 12%;
-  right: 12%;
-  top: 26%;
-  bottom: -8%;
-  background: var(--bg);
-  border-radius: 14px 14px 0 0;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, .2)
+.th.has-img {
+  background: transparent !important;
 }
 
-.th::before {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  left: 18%;
-  top: 36%;
-  width: 36%;
-  height: 9px;
-  border-radius: 5px;
-  background: var(--ac);
-  box-shadow: 0 22px 0 -2px var(--bd), 0 44px 0 -2px var(--bd)
+.th.cimg.has-img {
+  height: auto !important;
+  max-height: none !important;
+}
+
+.th.cimg.has-img img {
+  width: 100%;
+  height: auto !important;
+  object-fit: contain;
+  display: block;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
+  transform: translateZ(0);
+}
+
+.th img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
+  transform: translateZ(0);
 }
 
 .row {

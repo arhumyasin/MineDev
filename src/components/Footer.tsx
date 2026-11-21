@@ -88,7 +88,7 @@ export default function Footer() {
             <Link href="/services">E-commerce</Link><Link href="/services">AI automation</Link><Link href="/services">AI chatbots</Link>
           </div>
           <div className="fc"><h4>Get in touch</h4>
-            <a href="mailto:minedev544@gmail.com">minedev544@gmail.com</a><a href="tel:+923291130061">+92 3291130061</a>
+            <a href="mailto:Contact@minedev.agency">Contact@minedev.agency</a><a href="tel:+923291130061">+92 3291130061</a>
             <span className="stt flex items-center"><u />Open for new projects</span>
           </div>
         </div>

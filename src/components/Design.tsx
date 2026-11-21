@@ -110,17 +110,18 @@ export const serviceItems = [
 export const projects = [
   {
     id: 'saas',
-    title: 'Azzivone',
+    title: 'Guraisu',
     shortTitle: <>E-commerce | <span style={{ color: 'var(--li)' }}>Luxury Brand</span></>,
-    tag: 'Pakistan’s Premier Luxury Store',
+    tag: 'Premier Luxury Store',
     type: 'Luxury E-commerce',
     category: 'E-commerce',
     description: 'A high-end, lightning-fast digital storefront built to deliver an exclusive shopping experience and drive premium sales.',
-    subtitle: 'A premium D2C shopping experience designed for high conversions and speed.',
+    subtitle: 'A premium D2C shopping experience designed for high conversions and speed',
     sector: 'Fashion & Luxury',
     engagement: 'Store & Brand Build',
     status: 'Live',
     theme: '',
+    image: '/projects/E-commerce.jpg',
     challenge: 'The client needed a luxurious online presence that reflected their high-end brand identity while offering ultra-fast page load speeds, seamless payment integrations, and zero inventory friction during high-traffic sales.',
     technologies: ['Next.js', 'React', 'Shopify Plus', 'Stripe', 'Tailwind CSS', 'Vercel'],
     built: [
@@ -143,6 +144,7 @@ export const projects = [
     engagement: 'Full-Stack & AI Build',
     status: 'Live',
     theme: 'b',
+    image: '/projects/HealthCare.jpg',
     challenge: 'Hospitals faced immense delays due to manual patient onboarding, scattered medical records, and inefficient appointment scheduling, which increased administrative costs and reduced patient satisfaction.',
     technologies: ['React', 'Python', 'FastAPI', 'PostgreSQL', 'OpenAI API', 'Docker'],
     built: [
@@ -165,6 +167,7 @@ export const projects = [
     engagement: 'AI Agent & CRM Build',
     status: 'Live',
     theme: 'c',
+    image: '/projects/AiCRM.jpg',
     challenge: 'Businesses were losing potential clients outside of operating hours because human agents could not respond instantly to phone calls, WhatsApp messages, and website leads.',
     technologies: ['OpenAI', 'Python', 'WhatsApp Business API', 'Twilio', 'Node.js', 'MongoDB'],
     built: [
@@ -187,6 +190,7 @@ export const projects = [
     engagement: 'Voice AI Build',
     status: 'Live',
     theme: '',
+    image: '/projects/AiVoice.png',
     challenge: 'Businesses were missing calls outside office hours and losing customers to faster competitors, while reception staff spent their whole day on repetitive phone screening instead of helping the people in front of them.',
     technologies: ['OpenAI', 'ElevenLabs', 'Twilio', 'Node.js', 'Next.js', 'PostgreSQL'],
     built: [
@@ -198,24 +202,25 @@ export const projects = [
   },
   {
     id: 'agentic-commerce',
-    title: 'Agentic Commerce Store',
-    shortTitle: <><span style={{ color: 'var(--li)' }}>Agentic Commerce</span> Store</>,
-    tag: 'Agentic Commerce · E-commerce',
-    type: 'Agentic Commerce',
-    category: 'E-commerce',
-    description: 'An online store built so AI shopping assistants can discover products, compare options and place orders, alongside a fast storefront for human shoppers.',
-    subtitle: 'A store AI assistants can shop — and humans love to browse.',
-    sector: 'E-commerce & Retail',
-    engagement: 'Store & AI Build',
+    title: '3D Animated Website',
+    shortTitle: <><span style={{ color: 'var(--li)' }}>3D Animated</span> Website</>,
+    tag: '3D Animations · Interactive Web',
+    type: '3D Animated',
+    category: 'Three.js',
+    description: 'An immersive, cinema-grade 3D web experience engineered for smooth 60fps interaction — blending real-time WebGL visuals with high-converting brand storytelling',
+    subtitle: 'An interactive 3D web experience engineered for smooth motion — built to engage visitors visually and convert attention into action',
+    sector: 'Creative Tech & Interactive Brand Experience',
+    engagement: 'Full-Stack 3D Web Design & Engineering',
     status: 'Live',
     theme: 'b',
-    challenge: 'Shopping assistants are starting to buy on behalf of customers, but most stores are built only for humans — their product data is hidden in pages AI agents cannot read, so those sales go to competitors who are ready.',
-    technologies: ['Next.js', 'React', 'Shopify', 'OpenAI API', 'Stripe', 'Vercel'],
+    image: '/projects/3D.jpg',
+    challenge: 'Most 3D websites fail in production because heavy polygonal meshes, uncompressed textures, and unoptimized shader passes crush frame rates — causing laggy scroll interactions, overheating on mobile devices, and slow initial load times that kill user retention before the first scene even renders',
+    technologies: ['Three.js', 'React Three Fiber', 'Next.js', 'GSAP', 'GLSL'],
     built: [
-      ['AI-Readable Catalogue', 'Structured product data AI shopping assistants can discover and compare.'],
-      ['Agentic Checkout', 'AI assistants can place orders securely, with clear limits set by the store.'],
-      ['Fast Human Storefront', 'A lightning-fast storefront for human shoppers, with the same live stock.'],
-      ['Live Inventory Sync', 'Stock, prices and orders stay in sync across AI and human checkouts.']
+      ['Smooth 60fps 3D Rendering', 'Optimized draw calls, scene lighting, and GPU rendering pipelines to keep interactions fluid across desktop and mobile screens'],
+      ['Scroll-Driven Motion Choreography', 'Synced camera movement, transitions, and 3D object states with user scroll so storytelling feels natural and responsive'],
+      ['Compressed 3D Assets & Fast Load', 'Streamlined 3D meshes and textures for rapid initial loading without sacrificing visual detail or clarity'],
+      ['Interactive UI & CTA Flow', 'Paired real-time 3D visuals with clean interface layouts and clear project inquiry pathways so visitors can move smoothly from exploration to action']
     ]
   },
   {
@@ -231,6 +236,7 @@ export const projects = [
     engagement: 'Integration Build',
     status: 'Live',
     theme: 'c',
+    image: '/projects/MCP.jpg',
     challenge: 'Teams wanted to ask AI assistants questions about their own business — sales, stock, payments — but their data lived in separate tools with no safe way to connect it, so answers were guesses instead of facts.',
     technologies: ['Model Context Protocol', 'Node.js', 'TypeScript', 'PostgreSQL', 'OpenAI API', 'Docker'],
     built: [
@@ -253,6 +259,7 @@ export const projects = [
     engagement: 'Multi-Agent Build',
     status: 'Live',
     theme: '',
+    image: '/projects/AiAgent.jpg',
     challenge: 'The sales team spent most of its week on routine work — researching leads, writing outreach, chasing replies and compiling reports — leaving almost no time for real conversations and closing deals.',
     technologies: ['OpenAI', 'LangChain', 'Python', 'PostgreSQL', 'Slack API', 'Next.js'],
     built: [
@@ -275,6 +282,7 @@ export const projects = [
     engagement: 'SaaS Product Build',
     status: 'Live',
     theme: 'b',
+    image: '/projects/Saas.jpg',
     challenge: 'Founders were checking five different tools to understand their subscription business, spotting churn and falling revenue only after the money was already gone.',
     technologies: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Stripe', 'Vercel'],
     built: [
@@ -288,9 +296,12 @@ export const projects = [
 
 
 export function ProjectCard({ project }: { project: (typeof projects)[number] }) {
+  const img = 'image' in project ? (project.image as string | undefined) : undefined
   return (
     <Link className="card sp rv" href={`/projects/${project.id}`}>
-      <div className={`th${project.theme ? ` ${project.theme}` : ''}`} />
+      <div className={`th${img ? ' has-img' : ''}${project.theme ? ` ${project.theme}` : ''}`}>
+        {img && <img src={img} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />}
+      </div>
       <div className="row"><span className="pl">{project.type}</span><span className="pl">{project.category}</span></div>
       <h3>{project.shortTitle}</h3>
       <p>{project.description}</p>
