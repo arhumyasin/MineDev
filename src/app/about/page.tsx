@@ -30,19 +30,13 @@ const reasons = [
   },
 ]
 
-/* Your problem -> our fix */
+
 const fixes = [
   { problem: 'Your website is slow and visitors leave', fix: 'We rebuild it for speed so more people stay and enquire' },
   { problem: 'Leads come in but nobody follows up in time', fix: 'AI chatbots and automations reply instantly 24/7' },
   { problem: 'Your team wastes hours on repetitive work', fix: 'We automate it so your people focus on growth' },
 ]
 
-/* ─────────────────────────────────────────────────────────────
-   TEAM: edit names, roles and bios here.
-   Photos live in the /public/team folder:
-   Arhum.png  Hadi.png  Zainab.jpeg  Abdullah.jpeg  Ahmad.jpeg
-   (file names are case sensitive and must match exactly).
-───────────────────────────────────────────────────────────── */
 const founder = {
   name: 'Arhum Yasin',
   role: 'Founder & Technical lead',
@@ -111,15 +105,26 @@ const css = `
 .tm-founder h4{margin:0;font-size:1.5rem;letter-spacing:-.02em}
 .tm-role{display:block;margin:2px 0 10px;color:var(--li);font-weight:700;font-size:.85rem;letter-spacing:.04em}
 .tm-founder p{margin:0;max-width:60ch;font-size:.95rem;line-height:1.7}
-@media(max-width:560px){.tm-founder{grid-template-columns:1fr}.tm-founder .btn{width:100%;justify-content:space-between}}
+@media(max-width:850px){.tm-founder{grid-template-columns:1fr;align-items:start;gap:16px}.tm-founder .btn{width:100%;justify-content:space-between}}
 .tm-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:14px}
 @media(max-width:620px){.tm-grid{grid-template-columns:1fr}}
 .tm-card{display:flex;align-items:center;gap:20px;padding:24px}
 .tm-card .tm-av{width:96px;height:96px;font-size:1.6rem}
-@media(max-width:380px){.tm-card{gap:14px;padding:18px}.tm-card .tm-av{width:76px;height:76px;font-size:1.3rem}}
 .tm-card h4{margin:0;font-size:1.15rem;letter-spacing:-.01em}
 .tm-card .tm-role{margin:2px 0 10px;font-size:.8rem}
 .tm-card p{margin:0;font-size:.9rem;line-height:1.6}
+
+/* 850px aur us se chhoti screen: team cards mein pehle photo, phir name, role aur bio (Founder jaisa) */
+@media(max-width:850px){
+  .tm-card{flex-direction:column;align-items:flex-start;gap:16px}
+  .tm-card .tm-av{width:104px;height:104px;font-size:1.8rem}
+  .tm-card > div:last-child{width:100%}
+}
+@media(max-width:380px){
+  .tm-card{padding:18px}
+  .tm-card .tm-av{width:88px;height:88px;font-size:1.5rem}
+}
+
 @media(prefers-reduced-motion:reduce){.ab-eb i,.tm-label i{animation:none}}
 
 /* Founder aur team cards ki bio: chips jaisa white text + green glow */
