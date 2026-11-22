@@ -45,7 +45,7 @@ const fixes = [
 ───────────────────────────────────────────────────────────── */
 const founder = {
   name: 'Arhum Yasin',
-  role: 'Founder & UI/UX Designer',
+  role: 'Founder & Technical lead',
   initials: 'AR',
   bio: 'I started MineDev with one belief that a leader serves before he leads so I put trust before profit and excellence before excuses and treat every client as a responsibility I will answer for',
   photo: '/team/Arhum.png' as string,
@@ -53,6 +53,7 @@ const founder = {
 
 const members = [
   { name: 'Mashal Hadi', role: 'C-T-O / AI & FullStack Engineer', initials: 'HD', bio: 'I lead our technology and architecture and build scalable full-stack applications and AI systems that are fast and secure and ready to grow with your business', photo: '/team/Hadi.png' as string },
+  { name: 'Muhammad Asif', role: 'Senior Frontend Engineer & Product Manager', initials: 'MA', bio: 'With 5+ years of engineering experience, I lead frontend development and product execution, building ultra-fast user experiences and guiding product roadmaps from concept to launch', photo: '/team/Asif.png' as string },
   { name: 'Zainab', role: 'Software Engineer', initials: 'ZN', bio: 'I turn requirements into clean reliable code and build responsive features and integrations that work smoothly on every device and scale with your business', photo: '/team/Zainab.jpeg' as string },
   { name: 'Tayyaba Khan', role: 'Content & Branding Manager', initials: 'AH', bio: 'I shape your brand voice and visual identity and create clear persuasive content that builds trust and keeps every message consistent across your website and channels', photo: '/team/tayyaba.jpeg' as string },
   { name: 'Abdullah Azeem', role: 'Lead Generation & Social-Media Marketer', initials: 'AB', bio: 'I grow your audience and fill your pipeline with targeted social media campaigns and lead generation strategies that bring in qualified customers and measurable results', photo: '/team/Abdullah.jpeg' as string },

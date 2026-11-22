@@ -7,8 +7,12 @@ import BackgroundOrbs from '@/components/BackgroundOrbs'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Your Agency — Web Apps & AI Automation',
+  title: 'MineDev — Web Apps & AI Automation',
   description: 'Digital experiences, web apps, and AI automation for ambitious teams.',
+  icons: {
+    icon: '/icon.png',
+    apple: '/icon.png',
+  },
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
