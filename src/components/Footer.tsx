@@ -77,9 +77,9 @@ export default function Footer() {
             <div className="soc flex items-center flex-wrap">
               <a href="https://www.linkedin.com/company/minedev-agency/" target="_blank" aria-label="LinkedIn"><Icon name="ln" className="w-5 h-5" /></a>
               <a href="https://www.instagram.com/minedev_agency" target="_blank" aria-label="Instagram"><Icon name="ig" className="w-5 h-5" /></a>
-              <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FacebookIcon className="w-5 h-5" /></a>
-              <a href="https://www.reddit.com/" target="_blank" rel="noopener noreferrer" aria-label="Reddit"><RedditIcon className="w-5 h-5" /></a>
-              <a href="https://x.com/" target='_blank' aria-label="X"><span>𝕏</span></a>
+              <a href="https://www.facebook.com/profile.php?id=61596220178129&sk=reels_tab" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FacebookIcon className="w-5 h-5" /></a>
+              <a href="https://www.reddit.com/user/minedev_agency/" target="_blank" rel="noopener noreferrer" aria-label="Reddit"><RedditIcon className="w-5 h-5" /></a>
+              <a href="https://x.com/minedev_agency" target='_blank' aria-label="X"><span>𝕏</span></a>
             </div>
           </div>
           <div className="fc"><h4>Pages</h4>{pages.map(([label, href]) => <Link href={href} key={href}>{label}</Link>)}</div>
